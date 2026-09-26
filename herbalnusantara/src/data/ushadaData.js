@@ -1,59 +1,81 @@
-// src/data/ushadaData.js
-
-// 1. DATA KATALOG TANAMAN
-export const tanamanList = [
+export const ushadaData = [
   {
-    id: "T001",
-    nama: "Jahe Merah",
-    khasiatUtama: "Meredakan Mual & Menghangatkan Tubuh",
-    deskripsi: "Rimpang dengan rasa pedas yang khas, sangat baik untuk melancarkan peredaran darah dan mengatasi masuk angin.",
-    gambar: "https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?q=80&w=500&auto=format&fit=crop" // Gambar placeholder
+    id: "r1",
+    type: "resep",
+    name: "Wedang Jahe Merah",
+    symptoms: ["masuk angin", "mual", "kedinginan", "pegal"],
+    tags: ["Pencernaan", "Kebugaran"],
+    description: "Ramuan penghangat tubuh yang sangat efektif meredakan masuk angin, mual, dan melancarkan peredaran darah.",
+    ingredients: [
+      "2 ruas jahe merah (bakar sebentar lalu geprek)",
+      "1 batang serai (memarkan)",
+      "Gula aren atau madu secukupnya",
+      "400ml air matang"
+    ],
+    steps: [
+      "Rebus air di dalam panci hingga mendidih.",
+      "Masukkan jahe merah dan serai yang sudah digeprek.",
+      "Kecilkan api, biarkan direbus selama 10-15 menit agar sari-sarinya keluar.",
+      "Matikan api, saring air rebusan ke dalam gelas.",
+      "Tambahkan madu atau gula aren sesuai selera, nikmati selagi hangat."
+    ],
+    image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=400&auto=format&fit=crop"
   },
   {
-    id: "T002",
-    nama: "Kunyit",
-    khasiatUtama: "Anti-inflamasi & Meredakan Nyeri Lambung",
-    deskripsi: "Mengandung kurkumin yang sangat baik untuk meredakan peradangan dan masalah pencernaan seperti maag.",
-    gambar: "https://images.unsplash.com/photo-1615486171448-4af6215f5734?q=80&w=500&auto=format&fit=crop"
-  }
-];
-
-// 2. DATA ARTIKEL & RAMUAN
-export const artikelList = [
-  {
-    id: "A001",
-    judul: "Ramuan Jahe Merah Penangkal Masuk Angin",
-    deskripsiSingkat: "Resep tradisional simpel untuk mengusir hawa dingin dan mual.",
-    panduanPraktis: "Cuci bersih 2 ruas jahe merah, geprek, lalu rebus dengan 2 gelas air hingga tersisa 1 gelas. Minum selagi hangat. Pastikan istirahat dan tidur 7-8 jam untuk memaksimalkan efeknya.",
-    bahan: ["T001"], // Relasi ke ID Tanaman
-    artikelTerkait: ["A002"]
+    id: "r2",
+    type: "resep",
+    name: "Kunyit Asam",
+    symptoms: ["nyeri haid", "bau badan", "pencernaan kurang lancar", "pegal"],
+    tags: ["Pereda Nyeri", "Pencernaan"],
+    description: "Minuman tradisional penyegar tubuh dan pereda nyeri alami khas tradisi keraton nusantara.",
+    ingredients: [
+      "100 gram kunyit (kupas, cuci bersih)",
+      "50 gram asam jawa",
+      "100 gram gula merah (sisir halus)",
+      "Sejumput garam",
+      "1 liter air"
+    ],
+    steps: [
+      "Parut atau blender kunyit hingga halus.",
+      "Rebus air di panci, masukkan parutan kunyit, asam jawa, dan gula merah.",
+      "Tambahkan sejumput garam, aduk rata dan tunggu hingga mendidih.",
+      "Setelah mendidih dan wangi, matikan api.",
+      "Saring ramuan dan dinginkan. Kunyit asam sangat segar dinikmati dalam keadaan dingin."
+    ],
+    image: "https://images.unsplash.com/photo-1599305090598-fe179d501227?q=80&w=400&auto=format&fit=crop"
   },
   {
-    id: "A002",
-    judul: "Kunyit Asam Penyelamat Lambung",
-    deskripsiSingkat: "Paduan kunyit dan asam jawa untuk menenangkan perut kembung dan perih.",
-    panduanPraktis: "Parut 3 ruas kunyit, peras airnya. Campur dengan sedikit asam jawa dan air hangat. Minum 1x sehari setelah makan.",
-    bahan: ["T002"],
-    artikelTerkait: ["A001"]
-  }
-];
-
-// 3. LOGIKA DETEKSI KELUHAN
-// Ini yang akan kita cocokkan dengan input user nanti
-export const keluhanList = [
-  {
-    id: "K001",
-    gejala: "Mual & Masuk Angin",
-    rekomendasiRamuan: "A001", // Langsung mengarah ke ID Artikel Ramuan Jahe Merah
-    pesanSingkat: "Tubuhmu butuh kehangatan. Jahe merah sangat cocok untuk meredakan mual dan membuang gas berlebih di perut."
+    id: "t1",
+    type: "tanaman",
+    name: "Daun Sirih",
+    symptoms: ["luka luar", "mimisan", "bau mulut", "gatal"],
+    tags: ["Antiseptik", "Perawatan Luar"],
+    description: "Tanaman merambat asli Indonesia yang sangat ampuh dan dikenal luas sebagai antiseptik serta antibakteri alami.",
+    ingredients: [],
+    steps: [],
+    image: "https://images.unsplash.com/photo-1615557960916-5f4791effe9d?q=80&w=400&auto=format&fit=crop"
   },
   {
-    id: "K002",
-    gejala: "Perut Perih / Maag",
-    rekomendasiRamuan: "A002", 
-    pesanSingkat: "Kunyit memiliki zat anti-radang yang bisa melapisi dan menenangkan dinding lambungmu."
+    id: "r3",
+    type: "resep",
+    name: "Beras Kencur",
+    symptoms: ["pegal", "batuk", "kurang nafsu makan", "kelelahan"],
+    tags: ["Kebugaran", "Pemulihan"],
+    description: "Minuman jamu populer untuk menghilangkan pegal linu, menghangatkan tubuh, dan mengembalikan energi setelah beraktivitas seharian.",
+    ingredients: [
+      "50 gram kencur (kupas bersih)",
+      "100 gram beras (rendam air selama 3 jam)",
+      "1 ruas jahe",
+      "Gula jawa dan sedikit asam jawa",
+      "Air secukupnya"
+    ],
+    steps: [
+      "Sangrai beras yang sudah direndam hingga kering.",
+      "Tumbuk atau blender beras, kencur, dan jahe hingga benar-benar halus.",
+      "Rebus air bersama gula jawa dan asam jawa hingga larut dan mendidih.",
+      "Tuang air rebusan gula perlahan ke dalam campuran beras kencur, aduk rata.",
+      "Saring dengan kain bersih agar ampasnya tidak ikut. Sajikan hangat atau dingin."
+    ],
+    image: "https://images.unsplash.com/photo-1564834724105-918b73d1b9e0?q=80&w=400&auto=format&fit=crop"
   }
 ];
-
-// 4. TEKS DISCLAIMER GLOBAL
-export const medicalDisclaimer = "Informasi ramuan herbal dari web ini berfungsi sebagai edukasi preventif atau pertolongan alami berbasis tradisional. Ini BUKAN pengganti konsultasi medis profesional. Segera periksakan ke dokter jika keluhan berlanjut atau memburuk.";
