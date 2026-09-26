@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // <-- Sudah ditambahkan
 import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineBookOpen, HiOutlineBeaker } from "react-icons/hi2";
 import { LuLeaf } from "react-icons/lu";
@@ -15,7 +16,8 @@ const item = {
 };
 
 export default function Pustaka() {
-  const [activeTab, setActiveTab] = useState("semua"); // "semua", "resep", "tanaman"
+  const [activeTab, setActiveTab] = useState("semua");
+  const navigate = useNavigate(); // <-- Sudah dideklarasikan
 
   // Filter data berdasarkan tab yang aktif
   const filteredData = ushadaData.filter((data) => {
@@ -84,6 +86,7 @@ export default function Pustaka() {
               {filteredData.map((itemData) => (
                 <motion.div 
                   key={itemData.id}
+                  onClick={() => navigate(`/detail/${itemData.id}`)} // <-- Perintah klik sudah ditambahkan
                   layout
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}

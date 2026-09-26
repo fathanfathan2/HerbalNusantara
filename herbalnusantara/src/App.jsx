@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Beranda from "./pages/Beranda";
 import Deteksi from "./pages/Deteksi";
-import Pustaka from "./pages/Pustaka"; // <-- 1. Import halamannya
+import Pustaka from "./pages/Pustaka";
+import Detail from "./pages/Detail"; // <-- 1. Import halamannya
 import Layout from "./components/Layout";
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/beranda" element={<Beranda />} />
           <Route path="/deteksi" element={<Deteksi />} />
-          <Route path="/pustaka" element={<Pustaka />} /> {/* <-- 2. Tambahkan rutenya */}
+          <Route path="/pustaka" element={<Pustaka />} />
+          <Route path="/detail/:id" element={<Detail />} /> {/* <-- 2. Tambahkan rutenya dengan parameter :id */}
         </Route>
       </Routes>
     </Router>

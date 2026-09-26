@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { HiOutlineMagnifyingGlass, HiOutlineSparkles } from "react-icons/hi2";
 import { ushadaData } from "../data/ushadaData";
@@ -20,11 +21,14 @@ const commonSymptoms = [
 export default function Deteksi() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("");
+  const navigate = useNavigate();
 
   // Logika Pencarian: Mencocokkan input dengan array 'symptoms' di database
   const filteredResults = useMemo(() => {
     const query = activeFilter || searchQuery;
-    if (!query.trim()) return []; // Kosongkan hasil jika belum ada pencarian
+    
+    // PERUBAHAN: Jika belum ada pencarian/filter, tampilkan SEMUA data
+    if (!query.trim()) return ushadaData; 
 
     return ushadaData.filter((data) =>
       data.symptoms.some((symp) => symp.toLowerCase().includes(query.toLowerCase()))
@@ -33,15 +37,15 @@ export default function Deteksi() {
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    setActiveFilter(""); // Matikan filter tombol jika user mengetik manual
+    setActiveFilter(""); 
   };
 
   const handleFilter = (symptom) => {
     if (activeFilter === symptom) {
-      setActiveFilter(""); // Batalkan pilihan jika diklik lagi
+      setActiveFilter(""); 
     } else {
       setActiveFilter(symptom);
-      setSearchQuery(""); // Bersihkan kolom pencarian
+      setSearchQuery(""); 
     }
   };
 
@@ -95,14 +99,14 @@ export default function Deteksi() {
 
         {/* Hasil Pencarian */}
         <motion.div variants={item} className="pt-4">
-          {(searchQuery || activeFilter) && (
-            <h2 className="font-serif text-xl text-stone-800 mb-5 flex items-center gap-2">
-              <HiOutlineSparkles className="text-amber-500 h-5 w-5" />
-              Rekomendasi untukmu
-            </h2>
-          )}
+          
+          {/* PERUBAHAN: Judul akan selalu muncul dan teksnya berubah otomatis */}
+          <h2 className="font-serif text-xl text-stone-800 mb-5 flex items-center gap-2">
+            <HiOutlineSparkles className="text-amber-500 h-5 w-5" />
+            {searchQuery || activeFilter ? "Rekomendasi untukmu" : "Semua Solusi Alami"}
+          </h2>
 
-          {/* Menampilkan pesan jika tidak ada hasil */}
+          {/* Menampilkan pesan jika tidak ada hasil saat proses filter */}
           {(searchQuery || activeFilter) && filteredResults.length === 0 && (
             <div className="bg-stone-100 rounded-3xl p-8 text-center border border-stone-200/60">
               <p className="text-stone-500">
@@ -116,6 +120,7 @@ export default function Deteksi() {
             {filteredResults.map((itemData) => (
               <motion.div 
                 key={itemData.id}
+                onClick={() => navigate(`/detail/${itemData.id}`)} 
                 layout
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
