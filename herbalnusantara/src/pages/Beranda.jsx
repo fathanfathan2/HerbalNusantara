@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // <-- Tambahan untuk navigasi logout
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
-  HiOutlineSun, 
+  HiOutlineSun,
+  HiOutlineMoon,
   HiOutlineBookOpen, 
-  HiOutlineHeart,
   HiOutlineSparkles,
-  HiOutlineArrowRightOnRectangle // <-- Ikon logout
+  HiOutlineArrowRightOnRectangle,
+  HiOutlineBookmarkSquare,
+  HiOutlineArrowRight,
+  HiOutlineCloud
 } from "react-icons/hi2";
-import { LuLeaf } from "react-icons/lu";
+import { LuLeaf, LuActivity, LuWind, LuThermometer, LuBrain } from "react-icons/lu";
+import { ushadaData } from "../data/ushadaData"; // Mengambil data asli
 
 const container = {
   hidden: { opacity: 0 },
@@ -22,109 +26,207 @@ const item = {
 
 export default function Beranda() {
   const [name, setName] = useState("Sobat Herbal");
-  const navigate = useNavigate(); // <-- Deklarasi navigasi
+  const [greeting, setGreeting] = useState({ text: "Halo", icon: HiOutlineSun, color: "text-amber-500" });
+  const [savedCount, setSavedCount] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // 1. Ambil Nama
     const storedName = localStorage.getItem("userName");
     if (storedName) setName(storedName);
+
+    // 2. Hitung jumlah Bookmark
+    const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    setSavedCount(bookmarks.length);
+
+    // 3. Logika Sapaan Waktu Dinamis
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 11) {
+      setGreeting({ text: "Selamat Pagi", icon: HiOutlineSun, color: "text-amber-500" });
+    } else if (hour >= 11 && hour < 15) {
+      setGreeting({ text: "Selamat Siang", icon: HiOutlineSun, color: "text-amber-600" });
+    } else if (hour >= 15 && hour < 18) {
+      setGreeting({ text: "Selamat Sore", icon: HiOutlineCloud, color: "text-orange-500" });
+    } else {
+      setGreeting({ text: "Selamat Malam", icon: HiOutlineMoon, color: "text-indigo-500" });
+    }
   }, []);
 
-  // Fungsi untuk Logout
   const handleLogout = () => {
-    localStorage.removeItem("userName"); // Hapus nama dari memori
-    navigate("/"); // Kembalikan ke halaman Login
+    localStorage.removeItem("userName");
+    navigate("/");
   };
 
+  // Mengambil 1 data utama untuk Highlight, dan 2 data untuk Populer
+  const heroItem = ushadaData[0]; 
+  const popularItems = ushadaData.slice(1, 3);
+
+  // Daftar pintasan cepat keluhan
+  const quickShortcuts = [
+    { label: "Pusing", icon: LuBrain },
+    { label: "Batuk", icon: LuWind },
+    { label: "Masuk Angin", icon: LuThermometer },
+    { label: "Pegal", icon: LuActivity },
+  ];
+
   return (
-    <div className="p-6 sm:p-10 min-h-full">
+    <div className="p-6 sm:p-10 min-h-full bg-stone-50 overflow-x-hidden">
       <motion.div 
         variants={container} 
         initial="hidden" 
         animate="show" 
-        className="max-w-4xl mx-auto space-y-8"
+        className="max-w-4xl mx-auto space-y-10"
       >
         
-        {/* Bagian Header & Sapaan */}
-        <motion.div variants={item} className="flex flex-col gap-2 pt-4 sm:pt-0">
-          <div className="flex justify-between items-start">
-            <h1 className="font-serif text-3xl sm:text-4xl text-emerald-900 tracking-tight">
-              Halo, {name}! <span className="inline-block origin-bottom-right hover:animate-pulse cursor-default">👋</span>
+        {/* ================= HEADER & STATISTIK ================= */}
+        <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-4 sm:pt-0">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2 text-stone-500 font-medium mb-1">
+              <greeting.icon className={`h-5 w-5 ${greeting.color}`} />
+              <span>{greeting.text},</span>
+            </div>
+            <h1 className="font-serif text-4xl sm:text-5xl text-emerald-950 tracking-tight font-bold">
+              {name} <span className="inline-block origin-bottom-right hover:animate-pulse cursor-default">👋</span>
             </h1>
-            
-            {/* Tombol Logout Baru */}
+          </div>
+          
+          <div className="flex items-center gap-3">
+            {/* Indikator Bookmark */}
+            <div className="flex items-center gap-3 bg-white border border-stone-200/80 px-4 py-2.5 rounded-2xl shadow-sm cursor-pointer hover:border-emerald-200 transition-colors" onClick={() => navigate('/tersimpan')}>
+              <div className="bg-emerald-100 p-1.5 rounded-xl text-emerald-700">
+                <HiOutlineBookmarkSquare className="h-5 w-5" />
+              </div>
+              <div className="text-sm">
+                <span className="block font-bold text-stone-800 leading-none">{savedCount}</span>
+                <span className="text-[10px] text-stone-500 font-medium uppercase tracking-wider">Tersimpan</span>
+              </div>
+            </div>
+
+            {/* Tombol Logout */}
             <button 
               onClick={handleLogout}
-              className="p-2 rounded-xl text-stone-400 hover:bg-stone-200/50 hover:text-rose-500 transition-colors tooltip-trigger relative group"
+              className="p-3 bg-white border border-stone-200/80 rounded-2xl text-stone-400 hover:bg-rose-50 hover:text-rose-500 hover:border-rose-200 transition-all shadow-sm tooltip-trigger relative group"
               aria-label="Ganti Akun"
             >
               <HiOutlineArrowRightOnRectangle className="h-6 w-6" />
-              <span className="absolute -bottom-8 right-0 bg-stone-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                Ganti Akun
+              <span className="absolute -bottom-10 right-0 bg-stone-800 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl z-50">
+                Keluar Akun
               </span>
             </button>
           </div>
-          <p className="text-stone-500 font-medium">
-            Siap meracik ketenangan hari ini?
-          </p>
         </motion.div>
 
-        {/* Info Cards (Highlight Harian) */}
-        <motion.div variants={item} className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          <div className="bg-emerald-700 rounded-3xl p-6 text-stone-50 shadow-xl shadow-emerald-900/20 relative overflow-hidden group cursor-pointer" onClick={() => navigate('/detail/r1')}>
-            <LuLeaf className="absolute -bottom-4 -right-4 h-28 w-28 text-emerald-600/50 group-hover:scale-110 transition-transform duration-500" />
-            <div className="relative z-10">
-              <div className="bg-emerald-600/50 w-11 h-11 rounded-2xl flex items-center justify-center mb-5 backdrop-blur-sm">
-                <HiOutlineSun className="h-6 w-6 text-emerald-100" />
+        {/* ================= PINTASAN CEPAT (QUICK ACTIONS) ================= */}
+        <motion.div variants={item} className="space-y-3">
+          <h3 className="text-sm font-semibold text-stone-400 uppercase tracking-wider">Punya keluhan cepat?</h3>
+          <div className="flex overflow-x-auto hide-scrollbar gap-3 pb-2 -mx-6 px-6 sm:mx-0 sm:px-0">
+            {quickShortcuts.map((shortcut, idx) => (
+              <button
+                key={idx}
+                onClick={() => navigate('/deteksi')}
+                className="flex items-center gap-2.5 bg-white border border-stone-200/60 px-5 py-3 rounded-2xl shadow-sm hover:shadow-md hover:border-emerald-300 hover:text-emerald-700 transition-all whitespace-nowrap group text-stone-600 font-medium"
+              >
+                <shortcut.icon className="h-5 w-5 text-emerald-600/70 group-hover:text-emerald-600 transition-colors" />
+                {shortcut.label}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ================= HIGHLIGHT HARIAN ================= */}
+        <motion.div variants={item} className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          
+          {/* Hero Card: Ramuan Hari Ini */}
+          <div 
+            className="lg:col-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer shadow-xl shadow-stone-200/50 min-h-[280px] flex flex-col justify-end"
+            onClick={() => navigate(`/detail/${heroItem.id}`)}
+          >
+            {/* Background Image & Overlay */}
+            <img 
+              src={heroItem.image} 
+              alt={heroItem.name} 
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/40 to-transparent"></div>
+            
+            {/* Badge Kategori */}
+            <div className="absolute top-6 left-6 bg-white/20 backdrop-blur-md border border-white/30 text-white px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+              <HiOutlineSparkles className="h-4 w-4 text-amber-300" />
+              Sorotan Hari Ini
+            </div>
+
+            {/* Konten Text */}
+            <div className="relative z-10 p-6 sm:p-8 w-full sm:w-4/5">
+              <h2 className="text-3xl sm:text-4xl font-serif text-white tracking-tight mb-3 drop-shadow-md">
+                {heroItem.name}
+              </h2>
+              <p className="text-emerald-50/80 text-sm line-clamp-2 leading-relaxed mb-5">
+                {heroItem.description}
+              </p>
+              <div className="flex items-center gap-2 text-emerald-200 text-sm font-semibold group-hover:text-white transition-colors">
+                Lihat Resepnya <HiOutlineArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </div>
-              <p className="font-medium text-emerald-200/80 text-sm mb-1">Ramuan Hari Ini</p>
-              <h3 className="text-2xl font-serif tracking-tight">Wedang Jahe Merah</h3>
             </div>
           </div>
           
-          <div className="bg-white rounded-3xl p-6 border border-stone-200/60 shadow-xl shadow-stone-200/40 col-span-1 sm:col-span-2 flex flex-col justify-center">
-             <div className="flex items-center gap-3 mb-3">
-                <div className="bg-amber-100 p-2.5 rounded-2xl text-amber-700">
-                    <HiOutlineSparkles className="h-5 w-5" />
-                </div>
-                <h3 className="font-serif text-lg text-stone-800">Tips Kebugaran</h3>
+          {/* Tips Kebugaran Card */}
+          <div className="bg-emerald-50 rounded-[2rem] p-7 border border-emerald-100/50 flex flex-col justify-center relative overflow-hidden group">
+             <LuLeaf className="absolute -bottom-6 -right-6 h-32 w-32 text-emerald-100/50 group-hover:rotate-12 transition-transform duration-700" />
+             <div className="relative z-10">
+               <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-white p-2.5 rounded-2xl text-emerald-600 shadow-sm">
+                      <LuActivity className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-serif text-xl text-emerald-900">Tips Sehat</h3>
+               </div>
+               <p className="text-emerald-800/80 text-sm leading-relaxed font-medium">
+                  Tahukah kamu? Mengonsumsi rebusan jahe merah atau kencur saat sore hari sangat efektif melancarkan sirkulasi darah dan mencegah kelelahan otot setelah beraktivitas seharian.
+               </p>
              </div>
-             <p className="text-stone-500 text-sm leading-relaxed">
-                Rebusan air jahe hangat di pagi hari terbukti dapat melancarkan peredaran darah, meredakan peradangan, dan memperkuat sistem imun tubuh secara alami. Jangan lupa tambahkan sedikit madu liar!
-             </p>
           </div>
         </motion.div>
 
-        {/* Section: Racikan Favorit */}
-        <motion.div variants={item} className="pt-2">
-          <div className="flex items-center justify-between mb-5">
-            <h2 className="font-serif text-2xl text-stone-800">Racikan Populer</h2>
-            <button onClick={() => navigate('/pustaka')} className="text-sm text-emerald-700 font-medium hover:text-emerald-800 transition-colors flex items-center gap-1">
+        {/* ================= RACIKAN POPULER ================= */}
+        <motion.div variants={item} className="pt-4">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="font-serif text-2xl text-stone-800">Banyak Dicari</h2>
+            <button onClick={() => navigate('/pustaka')} className="text-sm text-emerald-600 font-bold hover:text-emerald-800 transition-colors flex items-center gap-1 bg-emerald-50 px-4 py-2 rounded-xl">
               Lihat Pustaka <HiOutlineBookOpen className="h-4 w-4" />
             </button>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div onClick={() => navigate('/detail/r2')} className="group bg-white/70 backdrop-blur-md rounded-3xl p-4 border border-stone-200/60 shadow-lg shadow-stone-200/30 hover:shadow-xl hover:border-emerald-300/50 transition-all cursor-pointer flex gap-5 items-center">
-              <img src="https://images.unsplash.com/photo-1599305090598-fe179d501227?q=80&w=200&auto=format&fit=crop" alt="Kunyit Asam" className="w-24 h-24 rounded-2xl object-cover shadow-sm group-hover:scale-105 transition-transform duration-300" />
-              <div className="flex-1">
-                <h4 className="font-serif text-lg text-stone-800 group-hover:text-emerald-700 transition-colors">Kunyit Asam</h4>
-                <p className="text-xs text-stone-500 mt-1 line-clamp-2 leading-relaxed">Pereda nyeri alami dan penyegar tubuh khas tradisi keraton nusantara.</p>
-                <div className="mt-3 flex gap-2">
-                  <span className="px-2.5 py-1 bg-stone-100 text-stone-500 rounded-lg text-[10px] font-medium">Pencernaan</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            {popularItems.map((itemData) => (
+              <div 
+                key={itemData.id}
+                onClick={() => navigate(`/detail/${itemData.id}`)} 
+                className="group bg-white rounded-3xl p-4 sm:p-5 border border-stone-200/60 shadow-lg shadow-stone-200/20 hover:shadow-xl hover:border-emerald-300/50 transition-all cursor-pointer flex gap-5 items-center"
+              >
+                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden shrink-0 shadow-sm relative">
+                  <img 
+                    src={itemData.image} 
+                    alt={itemData.name} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                  />
+                  <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-serif text-lg sm:text-xl text-stone-800 group-hover:text-emerald-700 transition-colors mb-1.5">
+                    {itemData.name}
+                  </h4>
+                  <p className="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-3">
+                    {itemData.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {itemData.tags.slice(0,2).map((tag, i) => (
+                      <span key={i} className="px-2.5 py-1 bg-stone-100 text-stone-500 rounded-lg text-[10px] font-bold tracking-wide">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div onClick={() => navigate('/detail/r3')} className="group bg-white/70 backdrop-blur-md rounded-3xl p-4 border border-stone-200/60 shadow-lg shadow-stone-200/30 hover:shadow-xl hover:border-emerald-300/50 transition-all cursor-pointer flex gap-5 items-center">
-              <img src="https://images.unsplash.com/photo-1564834724105-918b73d1b9e0?q=80&w=200&auto=format&fit=crop" alt="Beras Kencur" className="w-24 h-24 rounded-2xl object-cover shadow-sm group-hover:scale-105 transition-transform duration-300" />
-              <div className="flex-1">
-                <h4 className="font-serif text-lg text-stone-800 group-hover:text-emerald-700 transition-colors">Beras Kencur</h4>
-                <p className="text-xs text-stone-500 mt-1 line-clamp-2 leading-relaxed">Menghilangkan pegal linu, menghangatkan tubuh, dan mengembalikan energi.</p>
-                <div className="mt-3 flex gap-2">
-                  <span className="px-2.5 py-1 bg-stone-100 text-stone-500 rounded-lg text-[10px] font-medium">Kebugaran</span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </motion.div>
 
