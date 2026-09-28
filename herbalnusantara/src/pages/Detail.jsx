@@ -9,6 +9,7 @@ import {
   HiBookmark
 } from "react-icons/hi2";
 import { ushadaData } from "../data/ushadaData";
+import toast from "react-hot-toast"; // <-- Tambahkan ini
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -29,16 +30,20 @@ export default function Detail() {
   }, [id]);
 
   // Fungsi untuk menyimpan/menghapus bookmark
-  const toggleBookmark = () => {
-    let saved = JSON.parse(localStorage.getItem("bookmarks")) || [];
-    if (isBookmarked) {
-      saved = saved.filter((savedId) => savedId !== id); // Hapus jika sudah ada
-    } else {
-      saved.push(id); // Tambah jika belum ada
-    }
-    localStorage.setItem("bookmarks", JSON.stringify(saved));
-    setIsBookmarked(!isBookmarked);
-  };
+const toggleBookmark = () => {
+  let saved = JSON.parse(localStorage.getItem("bookmarks")) || [];
+  if (isBookmarked) {
+    // Jika sebelumnya tersimpan, maka hapus
+    saved = saved.filter((savedId) => savedId !== id);
+    toast("Dihapus dari Tersimpan", { icon: "🗑️" }); // <-- Notifikasi hapus
+  } else {
+    // Jika belum, maka simpan
+    saved.push(id);
+    toast.success("Resep berhasil disimpan!", { icon: "🔖" }); // <-- Notifikasi simpan
+  }
+  localStorage.setItem("bookmarks", JSON.stringify(saved));
+  setIsBookmarked(!isBookmarked);
+};
 
   if (!data) {
     return (
