@@ -1,6 +1,6 @@
 export const ushadaData = [
   // ==========================================
-  // KATEGORI: TANAMAN HERBAL (30 DATA)
+  // KATEGORI: TANAMAN HERBAL (30 DATA LOKAL .JPG)
   // ==========================================
   {
     id: "t1", type: "tanaman", name: "Jahe Biasa",
@@ -8,7 +8,7 @@ export const ushadaData = [
     tags: ["Rimpang", "Penghangat"],
     description: "Rimpang populer yang kaya akan gingerol, sangat ampuh menghangatkan tubuh dan meredakan masalah pencernaan seperti mual.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1615486171448-4fd0a7905165?q=80&w=400&auto=format&fit=crop"
+    image: "/jahe.jpg"
   },
   {
     id: "t2", type: "tanaman", name: "Kunyit",
@@ -16,7 +16,7 @@ export const ushadaData = [
     tags: ["Rimpang", "Anti-inflamasi"],
     description: "Mengandung kurkumin yang bersifat anti-inflamasi kuat. Sangat baik untuk meredakan nyeri haid dan peradangan pada sendi.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1615486511484-92e172cb4f55?q=80&w=400&auto=format&fit=crop"
+    image: "/kunyit.jpg"
   },
   {
     id: "t3", type: "tanaman", name: "Kencur",
@@ -24,7 +24,7 @@ export const ushadaData = [
     tags: ["Rimpang", "Pelega Tenggorokan"],
     description: "Biasa digunakan oleh penyanyi untuk menjaga suara. Efektif meredakan batuk berdahak dan menghilangkan pegal linu.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1596484552834-6a58f84bfc88?q=80&w=400&auto=format&fit=crop"
+    image: "/kencur.jpg"
   },
   {
     id: "t4", type: "tanaman", name: "Temulawak",
@@ -32,7 +32,7 @@ export const ushadaData = [
     tags: ["Rimpang", "Pencernaan"],
     description: "Rimpang khas Indonesia yang terkenal untuk memperbaiki fungsi hati, meredakan kembung, dan meningkatkan nafsu makan.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1589146816551-ebbf255bc225?q=80&w=400&auto=format&fit=crop"
+    image: "/temulawak.jpg"
   },
   {
     id: "t5", type: "tanaman", name: "Daun Sirih",
@@ -40,7 +40,7 @@ export const ushadaData = [
     tags: ["Daun", "Antiseptik"],
     description: "Kaya akan antiseptik alami. Sering direbus untuk membersihkan luka luar, menghentikan mimisan, atau meredakan radang tenggorokan.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1615557960916-5f4791effe9d?q=80&w=400&auto=format&fit=crop"
+    image: "/daun-sirih.jpg"
   },
   {
     id: "t6", type: "tanaman", name: "Kayu Manis",
@@ -48,7 +48,7 @@ export const ushadaData = [
     tags: ["Rempah", "Aromaterapi"],
     description: "Kulit kayu beraroma manis dan hangat yang membantu melancarkan peredaran darah serta meredakan mual dan pusing ringan.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1556040220-4096d522378d?q=80&w=400&auto=format&fit=crop"
+    image: "/kayumanis.jpg"
   },
   {
     id: "t7", type: "tanaman", name: "Cengkeh",
@@ -56,7 +56,7 @@ export const ushadaData = [
     tags: ["Rempah", "Pereda Nyeri"],
     description: "Memiliki senyawa eugenol yang bertindak sebagai obat penawar rasa sakit alami yang ampuh, termasuk untuk sakit kepala dan sendi.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1601314115160-5f25a5f1f9a8?q=80&w=400&auto=format&fit=crop"
+    image: "/cengkeh.jpg"
   },
   {
     id: "t8", type: "tanaman", name: "Kapulaga",
@@ -64,7 +64,7 @@ export const ushadaData = [
     tags: ["Rempah", "Pelega Napas"],
     description: "Rempah mahal yang efektif untuk mengeluarkan dahak dari tenggorokan dan mengatasi kembung pada perut.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=400&auto=format&fit=crop"
+    image: "/kapulaga.jpg"
   },
   {
     id: "t9", type: "tanaman", name: "Serai (Sereh)",
@@ -72,7 +72,7 @@ export const ushadaData = [
     tags: ["Batang", "Relaksasi"],
     description: "Memiliki aroma citrus yang menenangkan. Mengandung sifat diuretik ringan yang membantu membuang asam urat berlebih.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?q=80&w=400&auto=format&fit=crop"
+    image: "/serai.jpg"
   },
   {
     id: "t10", type: "tanaman", name: "Bawang Putih",
@@ -80,7 +80,7 @@ export const ushadaData = [
     tags: ["Umbi", "Antibiotik"],
     description: "Antibiotik alami terkuat. Kandungan allicin-nya melebarkan pembuluh darah, efektif meredakan migrain dan peradangan sendi.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1540148426949-ea4ee3df1494?q=80&w=400&auto=format&fit=crop"
+    image: "/bawang-putih.jpg"
   },
   {
     id: "t11", type: "tanaman", name: "Lidah Buaya",
@@ -88,7 +88,7 @@ export const ushadaData = [
     tags: ["Daun", "Pendingin"],
     description: "Gel di dalam daunnya adalah pertolongan pertama terbaik untuk luka bakar ringan, kulit lecet, atau iritasi.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1595561111002-c16719b4b0e9?q=80&w=400&auto=format&fit=crop"
+    image: "/lidah-buaya.jpg"
   },
   {
     id: "t12", type: "tanaman", name: "Kumis Kucing",
@@ -96,7 +96,7 @@ export const ushadaData = [
     tags: ["Daun", "Diuretik"],
     description: "Tumbuhan herba yang sangat terkenal dalam pengobatan tradisional untuk meluruhkan batu ginjal dan mengatasi asam urat.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=400&auto=format&fit=crop"
+    image: "/kumis-kucing.jpg"
   },
   {
     id: "t13", type: "tanaman", name: "Daun Salam",
@@ -104,7 +104,7 @@ export const ushadaData = [
     tags: ["Daun", "Anti-toksin"],
     description: "Bukan hanya bumbu dapur, rebusan daun salam terbukti secara ilmiah mampu menurunkan kadar asam urat dalam darah.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=400&auto=format&fit=crop"
+    image: "/daun-salam.jpg"
   },
   {
     id: "t14", type: "tanaman", name: "Daun Jambu Biji",
@@ -112,7 +112,7 @@ export const ushadaData = [
     tags: ["Daun", "Penghenti Diare"],
     description: "Obat tradisional paling ampuh untuk diare dan sakit perut melilit berkat kandungan antibakteri alaminya yang tinggi.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=400&auto=format&fit=crop"
+    image: "/daun-jambu-biji.jpg"
   },
   {
     id: "t15", type: "tanaman", name: "Biji Pala",
@@ -120,7 +120,7 @@ export const ushadaData = [
     tags: ["Biji", "Penawar Insomnia"],
     description: "Mengandung senyawa miristisin yang memiliki efek sedatif (penenang) ringan, sangat ampuh memicu rasa kantuk dan mengatasi insomnia.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1611077544795-c9ebfb90a960?q=80&w=400&auto=format&fit=crop"
+    image: "/biji-pala.jpg"
   },
   {
     id: "t16", type: "tanaman", name: "Akar Alang-alang",
@@ -128,7 +128,7 @@ export const ushadaData = [
     tags: ["Akar", "Pereda Panas"],
     description: "Tumbuhan gulma yang akarnya merupakan pereda panas dalam dan radang tenggorokan yang sangat menyegarkan.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=400&auto=format&fit=crop"
+    image: "/akar-alang-alang.jpg"
   },
   {
     id: "t17", type: "tanaman", name: "Bunga Telang",
@@ -136,7 +136,7 @@ export const ushadaData = [
     tags: ["Bunga", "Anti-stres"],
     description: "Bunga biru cantik yang kaya antioksidan. Efektif meredakan stres, menurunkan pusing, dan mempermudah tidur pulas.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1596484552834-6a58f84bfc88?q=80&w=400&auto=format&fit=crop"
+    image: "/bunga-telang.jpg"
   },
   {
     id: "t18", type: "tanaman", name: "Binahong",
@@ -144,7 +144,7 @@ export const ushadaData = [
     tags: ["Daun", "Regenerasi Sel"],
     description: "Daun merambat ajaib yang mempercepat penyembuhan luka sobek, luka bakar, memar, hingga memulihkan pegal-pegal pasca operasi.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=400&auto=format&fit=crop"
+    image: "/binahong.jpg"
   },
   {
     id: "t19", type: "tanaman", name: "Daun Mint (Peppermint)",
@@ -152,7 +152,7 @@ export const ushadaData = [
     tags: ["Daun", "Penyegar"],
     description: "Mentol dalam daun mint memberikan sensasi dingin yang seketika meredakan mual, sakit kepala tegang, dan melegakan napas.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?q=80&w=400&auto=format&fit=crop"
+    image: "/daun-mint.jpg"
   },
   {
     id: "t20", type: "tanaman", name: "Pegagan",
@@ -160,7 +160,7 @@ export const ushadaData = [
     tags: ["Daun", "Sirkulasi Otak"],
     description: "Herba merambat yang melancarkan sirkulasi darah ke otak sehingga cepat menghilangkan pusing, serta bagus untuk kulit terluka.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1596484552834-6a58f84bfc88?q=80&w=400&auto=format&fit=crop"
+    image: "/pegagan.jpg"
   },
   {
     id: "t21", type: "tanaman", name: "Brotowali",
@@ -168,7 +168,7 @@ export const ushadaData = [
     tags: ["Batang", "Pahit Mujarab"],
     description: "Meskipun rasanya sangat pahit, rebusan batangnya adalah musuh utama penyakit rematik, pegal linu, dan nyeri persendian.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?q=80&w=400&auto=format&fit=crop"
+    image: "/brotowali.jpg"
   },
   {
     id: "t22", type: "tanaman", name: "Daun Saga",
@@ -176,7 +176,7 @@ export const ushadaData = [
     tags: ["Daun", "Obat Batuk Anak"],
     description: "Daun kecil-kecil yang memiliki rasa manis alami. Sangat cocok dan aman direbus untuk mengobati batuk dan radang pada anak-anak.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1596484552834-6a58f84bfc88?q=80&w=400&auto=format&fit=crop"
+    image: "/daun-saga.jpg"
   },
   {
     id: "t23", type: "tanaman", name: "Meniran",
@@ -184,7 +184,7 @@ export const ushadaData = [
     tags: ["Daun", "Imunomodulator"],
     description: "Tumbuhan liar yang berkhasiat tinggi menjaga daya tahan tubuh, meredakan diare kronis, dan menangkal masuk angin.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=400&auto=format&fit=crop"
+    image: "/meniran.jpg"
   },
   {
     id: "t24", type: "tanaman", name: "Kemangi",
@@ -192,7 +192,7 @@ export const ushadaData = [
     tags: ["Daun", "Karminatif"],
     description: "Lalapan beraroma wangi ini mengandung zat karminatif yang mendorong gas keluar dari perut, sangat pas mengatasi perut kembung.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1587313632749-3e3e0d84a7e9?q=80&w=400&auto=format&fit=crop"
+    image: "/kemangi.jpg"
   },
   {
     id: "t25", type: "tanaman", name: "Jeruk Nipis",
@@ -200,7 +200,7 @@ export const ushadaData = [
     tags: ["Buah", "Kaya Vitamin C"],
     description: "Asam alami dan vitamin C tingginya mampu memecah dahak pekat di tenggorokan dan mengusir gejala masuk angin.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1597711202868-b75f850d5351?q=80&w=400&auto=format&fit=crop"
+    image: "/jeruk-nipis.jpg"
   },
   {
     id: "t26", type: "tanaman", name: "Asam Jawa",
@@ -208,7 +208,7 @@ export const ushadaData = [
     tags: ["Buah", "Pereda Kram"],
     description: "Buah asam yang menjadi bahan wajib jamu keraton. Sangat efektif merelaksasi otot perut yang kram saat menstruasi atau diare.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1556040220-4096d522378d?q=80&w=400&auto=format&fit=crop"
+    image: "/asam-jawa.jpg"
   },
   {
     id: "t27", type: "tanaman", name: "Sambiloto",
@@ -216,7 +216,7 @@ export const ushadaData = [
     tags: ["Daun", "Raja Pahit"],
     description: "Dijuluki raja pahit, tanaman ini terbukti efektif menurunkan tekanan darah penyebab pusing dan meredakan radang akut.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=400&auto=format&fit=crop"
+    image: "/sambiloto.jpg"
   },
   {
     id: "t28", type: "tanaman", name: "Jahe Merah",
@@ -224,7 +224,7 @@ export const ushadaData = [
     tags: ["Rimpang", "Super Hangat"],
     description: "Varian jahe dengan rasa paling pedas dan panas. Mengandung minyak atsiri tertinggi untuk mengusir pegal linu dan radang sendi.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=400&auto=format&fit=crop"
+    image: "/jahe-merah.jpg"
   },
   {
     id: "t29", type: "tanaman", name: "Kayu Secang",
@@ -232,7 +232,7 @@ export const ushadaData = [
     tags: ["Kayu", "Antioksidan"],
     description: "Serutan kayu yang menghasilkan air rebusan berwarna merah anggur. Memiliki antioksidan tinggi untuk melawan radang dan meriang.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1556040220-4096d522378d?q=80&w=400&auto=format&fit=crop"
+    image: "/kayu-secang.jpg"
   },
   {
     id: "t30", type: "tanaman", name: "Daun Pandan",
@@ -240,11 +240,11 @@ export const ushadaData = [
     tags: ["Daun", "Relaksan"],
     description: "Aromanya yang wangi bukan hanya melezatkan makanan, tapi teh pandan berfungsi sebagai penenang saraf agar tidur lelap.",
     ingredients: [], steps: [],
-    image: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=400&auto=format&fit=crop"
+    image: "/daun-pandan.jpg"
   },
 
   // ==========================================
-  // KATEGORI: RESEP RAMUAN (30 DATA)
+  // KATEGORI: RESEP RAMUAN (30 DATA - MASIH GAMBAR UNSPLASH SEMENTARA)
   // ==========================================
   {
     id: "r1", type: "resep", name: "Wedang Jahe Merah Madu",
