@@ -1,9 +1,12 @@
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
   HiOutlineArrowLeft, 
   HiOutlineCheckCircle, 
-  HiOutlineListBullet 
+  HiOutlineListBullet,
+  HiOutlineBookmark,
+  HiBookmark
 } from "react-icons/hi2";
 import { ushadaData } from "../data/ushadaData";
 
@@ -13,15 +16,33 @@ const fadeUp = {
 };
 
 export default function Detail() {
-  const { id } = useParams(); // Mengambil ID dari URL
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
-  // Mencari data yang cocok dengan ID
   const data = ushadaData.find((item) => item.id === id);
+
+  // Cek apakah resep ini sudah ada di localStorage saat halaman dimuat
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    setIsBookmarked(saved.includes(id));
+  }, [id]);
+
+  // Fungsi untuk menyimpan/menghapus bookmark
+  const toggleBookmark = () => {
+    let saved = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    if (isBookmarked) {
+      saved = saved.filter((savedId) => savedId !== id); // Hapus jika sudah ada
+    } else {
+      saved.push(id); // Tambah jika belum ada
+    }
+    localStorage.setItem("bookmarks", JSON.stringify(saved));
+    setIsBookmarked(!isBookmarked);
+  };
 
   if (!data) {
     return (
-      <div className="flex flex-col items-center justify-center h-full text-stone-500">
+      <div className="flex flex-col items-center justify-center h-screen text-stone-500">
         <p>Racikan tidak ditemukan.</p>
         <button onClick={() => navigate(-1)} className="mt-4 px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg">Kembali</button>
       </div>
@@ -30,12 +51,12 @@ export default function Detail() {
 
   return (
     <div className="min-h-full pb-24 sm:pb-10 bg-stone-50">
-      {/* Gambar Header Full Width di HP, Rounded di Desktop */}
+      {/* Gambar Header */}
       <div className="relative w-full h-72 sm:h-96 sm:rounded-b-[3rem] overflow-hidden shadow-lg">
         <img src={data.image} alt={data.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/80 via-black/20 to-transparent"></div>
         
-        {/* Tombol Kembali */}
+        {/* Tombol Kembali (Kiri Atas) */}
         <button 
           onClick={() => navigate(-1)}
           className="absolute top-4 left-4 sm:top-8 sm:left-8 bg-white/20 backdrop-blur-md p-2.5 rounded-full text-white hover:bg-white/40 transition z-10"
@@ -43,7 +64,19 @@ export default function Detail() {
           <HiOutlineArrowLeft className="h-6 w-6" />
         </button>
 
-        {/* Judul di atas gambar */}
+        {/* Tombol Bookmark (Kanan Atas) */}
+        <button 
+          onClick={toggleBookmark}
+          className="absolute top-4 right-4 sm:top-8 sm:right-8 bg-white/20 backdrop-blur-md p-2.5 rounded-full text-white hover:bg-white/40 transition z-10"
+        >
+          {isBookmarked ? (
+            <HiBookmark className="h-6 w-6 text-amber-400" />
+          ) : (
+            <HiOutlineBookmark className="h-6 w-6" />
+          )}
+        </button>
+
+        {/* Judul */}
         <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 text-white z-10">
           <span className="bg-emerald-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider mb-3 inline-block shadow-sm">
             {data.type}
@@ -70,7 +103,7 @@ export default function Detail() {
           </div>
         </motion.div>
 
-        {/* Cek apakah ada daftar bahan (Tanaman mungkin tidak punya bahan) */}
+        {/* Bahan-bahan */}
         {data.ingredients && data.ingredients.length > 0 && (
           <motion.div variants={fadeUp} className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200/60 shadow-xl shadow-stone-200/30">
             <h2 className="font-serif text-2xl text-stone-800 mb-6 flex items-center gap-3">
@@ -90,7 +123,7 @@ export default function Detail() {
           </motion.div>
         )}
 
-        {/* Cek apakah ada langkah pembuatan */}
+        {/* Langkah Pembuatan */}
         {data.steps && data.steps.length > 0 && (
           <motion.div variants={fadeUp} className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200/60 shadow-xl shadow-stone-200/30">
             <h2 className="font-serif text-2xl text-stone-800 mb-8 flex items-center gap-3">
@@ -106,7 +139,6 @@ export default function Detail() {
                     <div className="w-8 h-8 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold shadow-sm shrink-0">
                       {idx + 1}
                     </div>
-                    {/* Garis vertikal penghubung langkah */}
                     {idx !== data.steps.length - 1 && <div className="w-0.5 h-full bg-stone-200 mt-2"></div>}
                   </div>
                   <p className="text-stone-600 pt-1 pb-4 leading-relaxed">{langkah}</p>

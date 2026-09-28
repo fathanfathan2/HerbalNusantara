@@ -3,7 +3,8 @@ import Login from "./pages/Login";
 import Beranda from "./pages/Beranda";
 import Deteksi from "./pages/Deteksi";
 import Pustaka from "./pages/Pustaka";
-import Detail from "./pages/Detail"; // <-- 1. Import halamannya
+import Detail from "./pages/Detail";
+import Tersimpan from "./pages/Tersimpan"; // <-- 1. Import halamannya
 import Layout from "./components/Layout";
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
           <Route path="/beranda" element={<Beranda />} />
           <Route path="/deteksi" element={<Deteksi />} />
           <Route path="/pustaka" element={<Pustaka />} />
-          <Route path="/detail/:id" element={<Detail />} /> {/* <-- 2. Tambahkan rutenya dengan parameter :id */}
+          <Route path="/tersimpan" element={<Tersimpan />} /> {/* <-- 2. Tambahkan rutenya */}
+          <Route path="/detail/:id" element={<Detail />} />
         </Route>
       </Routes>
     </Router>
