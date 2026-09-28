@@ -113,20 +113,20 @@ export default function Pustaka() {
           </div>
         </motion.div>
 
-        {/* ================= GRID KARTU DATA ================= */}
+      {/* ================= GRID KARTU DATA ================= */}
         <motion.div variants={item} className="pt-2 min-h-[400px]">
           {filteredData.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <AnimatePresence mode="popLayout">
+              <AnimatePresence mode="wait">
                 {filteredData.map((itemData) => (
                   <motion.div 
                     key={itemData.id}
                     onClick={() => navigate(`/detail/${itemData.id}`)}
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
+                    // HAPUS kata 'layout' di sini agar browser tidak ngelag menghitung posisi 60 kartu
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.2 }} // Animasi dipercepat sedikit agar terasa lebih ringan
                     className="bg-white/80 backdrop-blur-md rounded-3xl overflow-hidden border border-stone-200/60 shadow-lg shadow-stone-200/40 hover:shadow-xl hover:border-emerald-300/50 transition-all cursor-pointer group flex flex-col h-full"
                   >
                     {/* Bagian Gambar */}
@@ -134,6 +134,7 @@ export default function Pustaka() {
                       <img 
                         src={itemData.image} 
                         alt={itemData.name} 
+                        loading="lazy" // TAMBAHAN: Agar gambar tidak diload semua bersamaan (Lazy Load)
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
@@ -195,6 +196,7 @@ export default function Pustaka() {
             </motion.div>
           )}
         </motion.div>
+
 
       </motion.div>
     </div>
