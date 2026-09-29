@@ -9,10 +9,11 @@ import {
   HiOutlineArrowRightOnRectangle,
   HiOutlineBookmarkSquare,
   HiOutlineArrowRight,
-  HiOutlineCloud
+  HiOutlineCloud,
+  HiArrowDownTray // <-- IKON UNDUH DITAMBAHKAN
 } from "react-icons/hi2";
 import { LuLeaf, LuActivity, LuWind, LuThermometer, LuBrain } from "react-icons/lu";
-import { ushadaData } from "../data/ushadaData"; // Mengambil data asli
+import { ushadaData } from "../data/ushadaData";
 
 const container = {
   hidden: { opacity: 0 },
@@ -28,18 +29,16 @@ export default function Beranda() {
   const [name, setName] = useState("Sobat Herbal");
   const [greeting, setGreeting] = useState({ text: "Halo", icon: HiOutlineSun, color: "text-amber-500" });
   const [savedCount, setSavedCount] = useState(0);
+  const [installPrompt, setInstallPrompt] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 1. Ambil Nama
     const storedName = localStorage.getItem("userName");
     if (storedName) setName(storedName);
 
-    // 2. Hitung jumlah Bookmark
     const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
     setSavedCount(bookmarks.length);
 
-    // 3. Logika Sapaan Waktu Dinamis
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 11) {
       setGreeting({ text: "Selamat Pagi", icon: HiOutlineSun, color: "text-amber-500" });
@@ -50,6 +49,14 @@ export default function Beranda() {
     } else {
       setGreeting({ text: "Selamat Malam", icon: HiOutlineMoon, color: "text-indigo-500" });
     }
+
+    const handleBeforeInstall = (e) => {
+      e.preventDefault(); 
+      setInstallPrompt(e); 
+    };
+    window.addEventListener("beforeinstallprompt", handleBeforeInstall);
+
+    return () => window.removeEventListener("beforeinstallprompt", handleBeforeInstall);
   }, []);
 
   const handleLogout = () => {
@@ -57,11 +64,20 @@ export default function Beranda() {
     navigate("/");
   };
 
-  // Mengambil 1 data utama untuk Highlight, dan 2 data untuk Populer
+  const handleInstallClick = async () => {
+    if (!installPrompt) return;
+    
+    installPrompt.prompt();
+    const { outcome } = await installPrompt.userChoice;
+    
+    if (outcome === "accepted") {
+      setInstallPrompt(null);
+    }
+  };
+
   const heroItem = ushadaData[0]; 
   const popularItems = ushadaData.slice(1, 3);
 
-  // Daftar pintasan cepat keluhan
   const quickShortcuts = [
     { label: "Pusing", icon: LuBrain },
     { label: "Batuk", icon: LuWind },
@@ -70,14 +86,30 @@ export default function Beranda() {
   ];
 
   return (
-    <div className="p-6 sm:p-10 min-h-full bg-stone-50 overflow-x-hidden">
+    <div className="p-6 sm:p-10 min-h-full bg-stone-50 overflow-x-hidden relative">
+      
+      {/* ================= TOMBOL UNDUH MELAYANG (FAB) ================= */}
+      {installPrompt && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleInstallClick}
+          // Posisi diatur agak ke atas (bottom-24) di HP agar tidak tertutup menu navigasi bawah
+          className="fixed bottom-24 right-6 sm:bottom-10 sm:right-10 z-50 flex items-center gap-2.5 bg-emerald-700 text-white px-5 py-3.5 rounded-full shadow-2xl shadow-emerald-900/40 hover:bg-emerald-800 transition-colors"
+        >
+          <HiArrowDownTray className="h-5 w-5 animate-bounce" />
+          <span className="font-bold text-sm tracking-wide">Unduh App</span>
+        </motion.button>
+      )}
+
       <motion.div 
         variants={container} 
         initial="hidden" 
         animate="show" 
         className="max-w-4xl mx-auto space-y-10"
       >
-        
         {/* ================= HEADER & STATISTIK ================= */}
         <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-4 sm:pt-0">
           <div className="flex flex-col gap-2">
@@ -91,7 +123,6 @@ export default function Beranda() {
           </div>
           
           <div className="flex items-center gap-3">
-            {/* Indikator Bookmark */}
             <div className="flex items-center gap-3 bg-white border border-stone-200/80 px-4 py-2.5 rounded-2xl shadow-sm cursor-pointer hover:border-emerald-200 transition-colors" onClick={() => navigate('/tersimpan')}>
               <div className="bg-emerald-100 p-1.5 rounded-xl text-emerald-700">
                 <HiOutlineBookmarkSquare className="h-5 w-5" />
@@ -102,7 +133,6 @@ export default function Beranda() {
               </div>
             </div>
 
-            {/* Tombol Logout */}
             <button 
               onClick={handleLogout}
               className="p-3 bg-white border border-stone-200/80 rounded-2xl text-stone-400 hover:bg-rose-50 hover:text-rose-500 hover:border-rose-200 transition-all shadow-sm tooltip-trigger relative group"
@@ -116,7 +146,7 @@ export default function Beranda() {
           </div>
         </motion.div>
 
-        {/* ================= PINTASAN CEPAT (QUICK ACTIONS) ================= */}
+        {/* ================= PINTASAN CEPAT ================= */}
         <motion.div variants={item} className="space-y-3">
           <h3 className="text-sm font-semibold text-stone-400 uppercase tracking-wider">Punya keluhan cepat?</h3>
           <div className="flex overflow-x-auto hide-scrollbar gap-3 pb-2 -mx-6 px-6 sm:mx-0 sm:px-0">
@@ -135,13 +165,10 @@ export default function Beranda() {
 
         {/* ================= HIGHLIGHT HARIAN ================= */}
         <motion.div variants={item} className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          
-          {/* Hero Card: Ramuan Hari Ini */}
           <div 
             className="lg:col-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer shadow-xl shadow-stone-200/50 min-h-[280px] flex flex-col justify-end"
             onClick={() => navigate(`/detail/${heroItem.id}`)}
           >
-            {/* Background Image & Overlay */}
             <img 
               src={heroItem.image} 
               alt={heroItem.name} 
@@ -149,13 +176,11 @@ export default function Beranda() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/40 to-transparent"></div>
             
-            {/* Badge Kategori */}
             <div className="absolute top-6 left-6 bg-white/20 backdrop-blur-md border border-white/30 text-white px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2">
               <HiOutlineSparkles className="h-4 w-4 text-amber-300" />
               Sorotan Hari Ini
             </div>
 
-            {/* Konten Text */}
             <div className="relative z-10 p-6 sm:p-8 w-full sm:w-4/5">
               <h2 className="text-3xl sm:text-4xl font-serif text-white tracking-tight mb-3 drop-shadow-md">
                 {heroItem.name}
@@ -169,7 +194,6 @@ export default function Beranda() {
             </div>
           </div>
           
-          {/* Tips Kebugaran Card */}
           <div className="bg-emerald-50 rounded-[2rem] p-7 border border-emerald-100/50 flex flex-col justify-center relative overflow-hidden group">
              <LuLeaf className="absolute -bottom-6 -right-6 h-32 w-32 text-emerald-100/50 group-hover:rotate-12 transition-transform duration-700" />
              <div className="relative z-10">
