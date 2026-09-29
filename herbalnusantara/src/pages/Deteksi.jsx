@@ -288,6 +288,7 @@ export default function Deteksi() {
   };
 
   // LOGIKA FILTER DISESUAIKAN DENGAN ushadaData MILIK KITA
+// LOGIKA FILTER DISESUAIKAN DENGAN ushadaData MILIK KITA
   const results = useMemo(() => {
     if (!selectedSymptoms.length) return [];
     
@@ -296,9 +297,9 @@ export default function Deteksi() {
       .filter(c => selectedSymptoms.includes(c.id))
       .flatMap(c => c.keywords);
 
-    // 2. Filter ushadaData: cocokkan apakah ada symptom di data yang mengandung keyword
+    // 2. Filter ushadaData: HANYA munculkan "resep" DAN cocokkan keyword gejala
     return ushadaData.filter((data) => {
-      return data.symptoms.some(symp =>
+      return data.type === "resep" && data.symptoms.some(symp =>
         selectedKeywords.some(keyword => symp.toLowerCase().includes(keyword.toLowerCase()))
       );
     });
@@ -463,7 +464,7 @@ export default function Deteksi() {
                   </p>
                   <p className="mt-2 text-sm text-stone-400">
                     Coba pilih ulang dengan keluhan yang lebih sedikit.
-                  </p>
+                  </p>  
                 </div>
               )}
             </motion.section>
