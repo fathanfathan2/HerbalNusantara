@@ -6,7 +6,8 @@ import {
   HiOutlineCheckCircle, 
   HiOutlineListBullet,
   HiOutlineBookmark,
-  HiBookmark
+  HiBookmark,
+  HiOutlineShare // <-- TAMBAHKAN INI KOMA DAN KATA INI
 } from "react-icons/hi2";
 import { ushadaData } from "../data/ushadaData";
 import toast from "react-hot-toast"; 
@@ -45,6 +46,26 @@ export default function Detail() {
     setIsBookmarked(!isBookmarked);
   };
 
+  // Fungsi untuk Native Share
+  const handleShare = async () => {
+    const shareData = {
+      title: `HerbalNusantara - ${data.name}`,
+      text: `Lihat khasiat dan cara meracik ${data.name} di HerbalNusantara!`,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        console.log("Share dibatalkan");
+      }
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      toast.success("Link resep berhasil disalin!", { icon: "🔗" });
+    }
+  };
+
   if (!data) {
     return (
       <div className="flex flex-col items-center justify-center h-screen text-stone-500">
@@ -70,6 +91,14 @@ export default function Detail() {
         </button>
 
         {/* Tombol Bookmark (Kanan Atas) - SUDAH DIPERJELAS */}
+
+        {/* Tombol Share */}
+        <button 
+          onClick={handleShare}
+          className="absolute top-4 right-16 sm:top-8 sm:right-20 bg-emerald-700 p-2.5 rounded-full text-white shadow-lg hover:bg-emerald-800 transition z-10 mr-2"
+        >
+          <HiOutlineShare className="h-6 w-6" />
+        </button>
         <button 
           onClick={toggleBookmark}
           className="absolute top-4 right-4 sm:top-8 sm:right-8 bg-emerald-700 p-2.5 rounded-full text-white shadow-lg hover:bg-emerald-800 transition z-10"
