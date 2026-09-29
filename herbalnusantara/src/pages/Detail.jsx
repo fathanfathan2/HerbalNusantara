@@ -9,7 +9,7 @@ import {
   HiBookmark
 } from "react-icons/hi2";
 import { ushadaData } from "../data/ushadaData";
-import toast from "react-hot-toast"; // <-- Tambahkan ini
+import toast from "react-hot-toast"; 
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -30,20 +30,20 @@ export default function Detail() {
   }, [id]);
 
   // Fungsi untuk menyimpan/menghapus bookmark
-const toggleBookmark = () => {
-  let saved = JSON.parse(localStorage.getItem("bookmarks")) || [];
-  if (isBookmarked) {
-    // Jika sebelumnya tersimpan, maka hapus
-    saved = saved.filter((savedId) => savedId !== id);
-    toast("Dihapus dari Tersimpan", { icon: "🗑️" }); // <-- Notifikasi hapus
-  } else {
-    // Jika belum, maka simpan
-    saved.push(id);
-    toast.success("Resep berhasil disimpan!", { icon: "🔖" }); // <-- Notifikasi simpan
-  }
-  localStorage.setItem("bookmarks", JSON.stringify(saved));
-  setIsBookmarked(!isBookmarked);
-};
+  const toggleBookmark = () => {
+    let saved = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    if (isBookmarked) {
+      // Jika sebelumnya tersimpan, maka hapus
+      saved = saved.filter((savedId) => savedId !== id);
+      toast("Dihapus dari Tersimpan", { icon: "🗑️" }); 
+    } else {
+      // Jika belum, maka simpan
+      saved.push(id);
+      toast.success("Resep berhasil disimpan!", { icon: "🔖" }); 
+    }
+    localStorage.setItem("bookmarks", JSON.stringify(saved));
+    setIsBookmarked(!isBookmarked);
+  };
 
   if (!data) {
     return (
@@ -61,18 +61,18 @@ const toggleBookmark = () => {
         <img src={data.image} alt={data.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/80 via-black/20 to-transparent"></div>
         
-        {/* Tombol Kembali (Kiri Atas) */}
+        {/* Tombol Kembali (Kiri Atas) - SUDAH DIPERJELAS */}
         <button 
           onClick={() => navigate(-1)}
-          className="absolute top-4 left-4 sm:top-8 sm:left-8 bg-white/20 backdrop-blur-md p-2.5 rounded-full text-white hover:bg-white/40 transition z-10"
+          className="absolute top-4 left-4 sm:top-8 sm:left-8 bg-emerald-700 p-2.5 rounded-full text-white shadow-lg hover:bg-emerald-800 transition z-10"
         >
           <HiOutlineArrowLeft className="h-6 w-6" />
         </button>
 
-        {/* Tombol Bookmark (Kanan Atas) */}
+        {/* Tombol Bookmark (Kanan Atas) - SUDAH DIPERJELAS */}
         <button 
           onClick={toggleBookmark}
-          className="absolute top-4 right-4 sm:top-8 sm:right-8 bg-white/20 backdrop-blur-md p-2.5 rounded-full text-white hover:bg-white/40 transition z-10"
+          className="absolute top-4 right-4 sm:top-8 sm:right-8 bg-emerald-700 p-2.5 rounded-full text-white shadow-lg hover:bg-emerald-800 transition z-10"
         >
           {isBookmarked ? (
             <HiBookmark className="h-6 w-6 text-amber-400" />
