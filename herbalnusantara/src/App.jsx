@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"; // <-- useLocation DITAMBAHKAN
 import { motion, AnimatePresence } from "framer-motion";
-import { Toaster } from "react-hot-toast"; // <-- INI YANG KEMBALI DITAMBAHKAN
+import { Toaster } from "react-hot-toast";
 
 // IMPORT HALAMAN
 import Login from "./pages/Login";
@@ -13,6 +13,25 @@ import Tersimpan from "./pages/Tersimpan";
 
 // IMPORT LAYOUT
 import Layout from "./components/Layout";
+
+// ================= KOMPONEN SCROLL TO TOP =================
+// Fungsi ini bertugas mereset scroll setiap kali URL berubah
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Kembalikan window utama ke atas
+    window.scrollTo(0, 0);
+    // Kembalikan elemen <main> ke atas (berjaga-jaga jika area scroll ada di dalam container)
+    const mainContent = document.querySelector("main");
+    if (mainContent) {
+      mainContent.scrollTo(0, 0);
+    }
+  }, [pathname]);
+
+  return null;
+}
+// ==========================================================
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,8 +45,6 @@ export default function App() {
 
   return (
     <>
-      {/* ================= WADAH NOTIFIKASI ================= */}
-      {/* Posisinya bisa kamu ubah jadi "top-center" kalau ingin notifnya di atas */}
       <Toaster position="top-center" reverseOrder={false} />
 
       <AnimatePresence mode="wait">
@@ -45,7 +62,6 @@ export default function App() {
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="mb-4"
             >
-              {/* PASTIKAN NAMA FILE LOGO SESUAI */}
               <img 
                 src="/logoherbaln.png" 
                 alt="Logo Herbal Nusantara" 
@@ -81,6 +97,9 @@ export default function App() {
 
       {/* ================= APLIKASI UTAMA ================= */}
       <BrowserRouter>
+        {/* PASANG SCROLL TO TOP DI SINI (Di dalam BrowserRouter) */}
+        <ScrollToTop />
+        
         <Routes>
           <Route path="/" element={<Login />} />
           <Route element={<Layout />}>
