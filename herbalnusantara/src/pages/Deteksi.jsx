@@ -103,10 +103,26 @@ const COMPLAINTS = [
     regions: ["kneeL", "kneeR", "footL", "footR"],
     keywords: ["nyeri sendi", "asam urat", "sendi", "rematik", "encok"],
   },
+  {
+    id: "paru-paru",
+    label: "Paru-paru / Pernapasan",
+    area: "Dada",
+    icon: LuWind,
+    regions: ["chest"],
+    keywords: ["paru-paru", "sesak napas", "asma", "radang pernapasan"],
+  },
+  {
+    id: "jantung",
+    label: "Jantung / Berdebar",
+    area: "Dada Kiri",
+    icon: LuHeartPulse,
+    regions: ["heart"],
+    keywords: ["jantung", "dada berdebar", "tekanan darah tinggi", "kolesterol"],
+  },
 ];
 
-const LEFT_COLUMN = COMPLAINTS.slice(0, 5);
-const RIGHT_COLUMN = COMPLAINTS.slice(5);
+const LEFT_COLUMN = COMPLAINTS.slice(0, 6);
+const RIGHT_COLUMN = COMPLAINTS.slice(6);
 
 /* -------------------------------------------------------------------------- */
 /*  2. PATH SVG MANEKIN (viewBox 0 0 200 480)                                 */
@@ -117,6 +133,12 @@ const BODY_REGIONS = [
   { id: "shoulderL", paths: ["M60 100 Q66 90 79 92 L77 130 L58 128 Q54 112 60 100 Z"] },
   { id: "shoulderR", paths: ["M140 100 Q134 90 121 92 L123 130 L142 128 Q146 112 140 100 Z"] },
   { id: "chest", paths: ["M81 92 Q100 84 119 92 L121 158 Q100 164 79 158 Z"] },
+  {
+    id: "heart",
+    paths: [
+      "M109 125 C109 125 99 117 99 109 C99 104 103 101 106.5 103 C108 104 109 106 109 106 C109 106 110 104 111.5 103 C115 101 119 104 119 109 C119 117 109 125 109 125 Z",
+    ],
+  },
   { id: "upperArmL", paths: ["M58 134 L77 136 L73 200 L54 198 Z"] },
   { id: "upperArmR", paths: ["M142 134 L123 136 L127 200 L146 198 Z"] },
   {
@@ -309,7 +331,7 @@ export default function Deteksi() {
   const selectedComplaints = COMPLAINTS.filter((c) => selectedSymptoms.includes(c.id));
 
   return (
-    <main className="min-h-full bg-stone-50 overflow-x-hidden p-6 sm:p-10 pb-32">
+    <main className="min-h-full bg-stone-50 overflow-x-hidden p-6 sm:p-10 pb-[calc(11rem+env(safe-area-inset-bottom))]">
       <div className="mx-auto max-w-5xl">
         <AnimatePresence mode="wait">
           {phase === "select" ? (
@@ -363,10 +385,10 @@ export default function Deteksi() {
               </div>
 
               {/* Floating Action Button "Lanjut" */}
-              <motion.div
-                className="fixed bottom-20 sm:bottom-6 left-0 right-0 z-20 flex justify-center px-4"
-                exit={{ opacity: 0, y: 40 }}
-              >
+<motion.div
+  className="fixed left-0 right-0 z-20 flex justify-center px-4 bottom-[calc(7.5rem+env(safe-area-inset-bottom))] sm:bottom-[calc(2rem+env(safe-area-inset-bottom))]"
+  exit={{ opacity: 0, y: 40 }}
+>
                 <button
                   type="button"
                   disabled={!canContinue}

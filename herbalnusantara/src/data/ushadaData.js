@@ -515,5 +515,95 @@ export const ushadaData = [
     ingredients: ["3 batang serai besar (memarkan bagian pangkalnya)", "Air matang", "Gula batu atau aren"],
     steps: ["Geprek atau memarkan pangkal putih serai sampai hancur.", "Rebus dengan air mendidih sekitar 10 menit agar sari minyaknya keluar.", "Beri gula batu secukupnya, tuang ke gelas, seruput selagi hangat."],
     image: "/wedang-serai-hangat.png"
+  },
+  {
+    id: "tanaman-mengkudu",
+    name: "Mengkudu",
+    type: "tanaman",
+    image: "/mengkudu.png", // Sesuai dengan screenshot
+    description: "Buah dengan bau khas ini mengandung scopoletin yang berfungsi memperlebar pembuluh darah, menurunkan tekanan darah, dan sangat meringankan beban kerja jantung.",
+    tags: ["Jantung", "Hipertensi", "Pembuluh Darah"],
+    symptoms: ["jantung", "dada berdebar", "tekanan darah tinggi"],
+  },
+  {
+    id: "resep-sari-mengkudu",
+    name: "Sari Mengkudu Penjaga Jantung",
+    type: "resep",
+    image: "/sari-mengkudu.png", // Sesuai dengan screenshot
+    description: "Racikan tradisional yang terbukti secara turun-temurun untuk menstabilkan ritme jantung dan mencegah hipertensi.",
+    tags: ["Jantung", "Minuman Rutin", "Darah Tinggi"],
+    symptoms: ["jantung", "dada berdebar", "tekanan darah tinggi"],
+    ingredients: [
+      "2 buah Mengkudu matang (sudah lembek)",
+      "1 sendok makan Madu murni",
+      "Air matang secukupnya"
+    ],
+    steps: [
+      "Cuci bersih buah mengkudu matang.",
+      "Blender atau peras mengkudu dengan sedikit air matang.",
+      "Saring air perasan mengkudu ke dalam gelas.",
+      "Tambahkan madu untuk menyamarkan rasa dan aromanya yang kuat.",
+      "Minum rutin 1 kali sehari setelah makan."
+    ]
+  },
+  {
+    id: "resep-bawang-tunggal",
+    name: "Seduhan Bawang Tunggal Madu",
+    type: "resep",
+    image: "/seduhan-bawang-tunggal-madu.png", // Sesuai dengan screenshot
+    description: "Terapi alami pembersih plak pembuluh darah jantung. Sangat disarankan bagi penderita kolesterol tinggi dan nyeri dada ringan.",
+    tags: ["Jantung", "Pembersih Darah", "Kolesterol"],
+    symptoms: ["jantung", "kolesterol", "nyeri dada"],
+    ingredients: [
+      "3-5 siung Bawang Putih Tunggal",
+      "2 sendok makan Madu murni",
+      "1 gelas Air hangat"
+    ],
+    steps: [
+      "Memarkan (geprek) bawang putih tunggal dan diamkan selama 10 menit agar senyawa allicin-nya keluar maksimal.",
+      "Seduh bawang yang sudah dimemarkan dengan air hangat (jangan air mendidih agar nutrisinya tidak rusak).",
+      "Tambahkan madu, aduk hingga rata.",
+      "Minum racikan ini setiap pagi saat perut masih kosong."
+    ]
+  },
+  {
+    id: "resep-wedang-jahe-merah",
+    name: "Wedang Jahe Merah Serai",
+    type: "resep",
+    image: "/wedang-jahe-merah-serai.png", // Sesuai dengan screenshot
+    description: "Ramuan hangat yang melebarkan saluran pernapasan, meredakan asma, dan membersihkan paru-paru dari polusi udara.",
+    tags: ["Paru-paru", "Asma", "Pelega Napas"],
+    symptoms: ["paru-paru", "sesak napas", "asma", "batuk"],
+    ingredients: [
+      "2 ruas Jahe Merah",
+      "2 batang Serai",
+      "Gula aren secukupnya",
+      "2 gelas Air"
+    ],
+    steps: [
+      "Bakar jahe merah sebentar, lalu memarkan bersama batang serai.",
+      "Rebus jahe merah dan serai dengan 2 gelas air hingga mendidih dan air susut menjadi 1 gelas.",
+      "Tambahkan gula aren secukupnya sesuai selera.",
+      "Saring dan minum selagi hangat, terutama saat udara dingin atau napas terasa sesak."
+    ]
+  },
+  {
+    id: "resep-rebusan-sambiloto",
+    name: "Rebusan Sambiloto Pembersih Paru",
+    type: "resep",
+    image: "/rebusan-sambiloto.png", // Sesuai dengan screenshot
+    description: "Terapi kuat untuk membantu penyembuhan radang paru-paru dan mengeluarkan penumpukan dahak.",
+    tags: ["Paru-paru", "Radang", "Antibakteri"],
+    symptoms: ["paru-paru", "radang pernapasan", "napas berat"],
+    ingredients: [
+      "10-15 lembar Daun Sambiloto segar (atau 1 sdm sambiloto kering)",
+      "3 gelas Air"
+    ],
+    steps: [
+      "Cuci bersih daun sambiloto.",
+      "Rebus dengan 3 gelas air menggunakan api kecil hingga airnya menyusut menjadi kira-kira 1 gelas.",
+      "Matikan api, saring air rebusan.",
+      "Minum 2 kali sehari secara rutin. (Meskipun sangat pahit, khasiatnya luar biasa untuk paru-paru)."
+    ]
   }
 ];
